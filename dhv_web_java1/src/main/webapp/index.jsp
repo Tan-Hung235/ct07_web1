@@ -1,17 +1,49 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<style>
-#myHeader {
-background-color: rgba(0, 5, 7, 0);
-color: black;
-padding: 40px;
-text-align: center;
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>Form Validator</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<h1 id="myHeader"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRP4R-XBMZIWcnh-ZuKAC7rCJdftZ7Jzd1bvw&s" alt="W3Schools.com" style="width:400px;height:2\400px;"></h1>
-<h1 id="myHeader">DHV</h1>
+    <div class="container">
+        <img class="hero-image" src="https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?auto=format&fit=crop&w=800&q=80" alt="Hero image">
+        <form id="registration-form">
+            <h1>Register</h1>
+            <!--username-->
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" placeholder="Enter username">
+                <!--thong bao-->
+                <small></small>
+            </div>
+            <!--email-->
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" placeholder="Enter email">
+                <!--thong bao-->
+                <small></small>
+            </div>
+            <!--password-->
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" placeholder="Enter password">
+                <!--thong bao-->
+                <small></small>
+            </div>
+            <!--confirm password-->
+            <div class="form-group">
+                <label for="confirmPassword">Confirm Password</label>
+                <input type="password" id="confirmPassword" placeholder="Confirm Password">
+                <!--thong bao-->
+                <small></small>
+            </div>
+            <!--button-->
+            <button type="submit">Register</button>
+        </form>
+
+    </div>
+    <script src="index.js"></script>
 </body>
 </html>
