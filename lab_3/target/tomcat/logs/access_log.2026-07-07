@@ -1,0 +1,13 @@
+0:0:0:0:0:0:0:1 - - [07/Jul/2026:14:38:52 +0000] "GET / HTTP/1.1" 200 2157 http-bio-8080-exec-1 547
+0:0:0:0:0:0:0:1 - - [07/Jul/2026:14:39:00 +0000] "POST /login HTTP/1.1" 302 - http-bio-8080-exec-3 279
+0:0:0:0:0:0:0:1 - - [07/Jul/2026:14:39:00 +0000] "GET /products HTTP/1.1" 200 36450 http-bio-8080-exec-5 148
+0:0:0:0:0:0:0:1 - - [07/Jul/2026:14:39:04 +0000] "GET /products?action=edit&id=1 HTTP/1.1" 200 36604 http-bio-8080-exec-7 28
+0:0:0:0:0:0:0:1 - - [07/Jul/2026:14:39:06 +0000] "POST /products HTTP/1.1" 302 - http-bio-8080-exec-9 14
+0:0:0:0:0:0:0:1 - - [07/Jul/2026:14:39:07 +0000] "GET /products HTTP/1.1" 200 36450 http-bio-8080-exec-1 13
+0:0:0:0:0:0:0:1 - - [07/Jul/2026:14:39:20 +0000] "GET /products?action=delete&id=2 HTTP/1.1" 200 36450 http-bio-8080-exec-5 403
+0:0:0:0:0:0:0:1 - - [07/Jul/2026:14:39:36 +0000] "POST /products HTTP/1.1" 302 - http-bio-8080-exec-6 11
+0:0:0:0:0:0:0:1 - - [07/Jul/2026:14:39:36 +0000] "GET /products HTTP/1.1" 200 36450 http-bio-8080-exec-3 19
+0:0:0:0:0:0:0:1 - - [07/Jul/2026:15:20:04 +0000] "GET / HTTP/1.1" 200 2157 http-bio-8080-exec-1 331
+0:0:0:0:0:0:0:1 - - [07/Jul/2026:15:20:05 +0000] "GET /favicon.ico HTTP/1.1" 404 973 http-bio-8080-exec-3 7
+0:0:0:0:0:0:0:1 - - [07/Jul/2026:15:20:14 +0000] "POST /login HTTP/1.1" 302 - http-bio-8080-exec-5 233
+0:0:0:0:0:0:0:1 - - [07/Jul/2026:15:20:14 +0000] "GET /products HTTP/1.1" 200 36450 http-bio-8080-exec-7 33
