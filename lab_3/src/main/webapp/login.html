@@ -1,20 +1,177 @@
-<html>
-    <head>
+<!DOCTYPE html>
+<html lang="en">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
 
-    </head>
+<style>
+    *{
+        margin:0;
+        padding:0;
+        box-sizing:border-box;
+        font-family: Arial, Helvetica, sans-serif;
+    }
 
-    <body>
-        <h1>Login Form</h1>
-        <form action="./login" method="post">
+    body{
+        background:#f4f6f9;
+        padding:30px;
+    }
 
-            Enter Username: <input type="text" name="user"/><br/>
-            Enter Password: <input type="password" name="pass"/><br/>
-            <input type="submit" value="LOGIN"/>
+    h2{
+        text-align:center;
+        color:#2c3e50;
+        margin-bottom:30px;
+        font-size:32px;
+    }
 
-        </form>
+    form{
+        width:700px;
+        margin:0 auto 30px;
+        background:white;
+        padding:25px 30px;
+        border-radius:12px;
+        box-shadow:0 5px 15px rgba(0,0,0,0.15);
+    }
 
-    </body>
+    form div{
+        margin-bottom:15px;
+        font-weight:bold;
+        color:#444;
+    }
 
+    input{
+        width:100%;
+        padding:10px;
+        margin-top:5px;
+        border:1px solid #ccc;
+        border-radius:8px;
+        font-size:15px;
+        transition:.3s;
+    }
+
+    input:focus{
+        border-color:#3498db;
+        outline:none;
+        box-shadow:0 0 8px rgba(52,152,219,.3);
+    }
+
+    button{
+        background:#3498db;
+        color:white;
+        border:none;
+        padding:10px 20px;
+        border-radius:8px;
+        cursor:pointer;
+        font-size:15px;
+        transition:.3s;
+    }
+
+    button:hover{
+        background:#2980b9;
+    }
+
+    form a{
+        display:inline-block;
+        margin-left:10px;
+        text-decoration:none;
+        background:#95a5a6;
+        color:white;
+        padding:10px 20px;
+        border-radius:8px;
+    }
+
+    form a:hover{
+        background:#7f8c8d;
+    }
+
+    table{
+        width:100%;
+        border-collapse:collapse;
+        background:white;
+        box-shadow:0 5px 15px rgba(0,0,0,.15);
+        border-radius:10px;
+        overflow:hidden;
+    }
+
+    th{
+        background:#3498db;
+        color:white;
+        padding:15px;
+        font-size:15px;
+    }
+
+    td{
+        padding:12px;
+        border-bottom:1px solid #eee;
+        text-align:center;
+    }
+
+    tr:nth-child(even){
+        background:#f8f9fa;
+    }
+
+    tr:hover{
+        background:#ecf5ff;
+    }
+
+    .actions a{
+        text-decoration:none;
+        color:white;
+        padding:6px 12px;
+        border-radius:6px;
+        margin:0 4px;
+        font-size:14px;
+    }
+
+    .actions a:first-child{
+        background:#27ae60;
+    }
+
+    .actions a:first-child:hover{
+        background:#219150;
+    }
+
+    .actions a:last-child{
+        background:#e74c3c;
+    }
+
+    .actions a:last-child:hover{
+        background:#c0392b;
+    }
+</style>
+</head>
+
+<body>
+
+<div class="login-box">
+
+    <h1>Login</h1>
+
+    <form action="./login" method="post">
+
+        <div class="input-group">
+            <label>Username</label>
+            <input type="text" name="user" placeholder="Enter username" required>
+        </div>
+
+        <div class="input-group">
+            <label>Password</label>
+            <input type="password" name="pass" placeholder="Enter password" required>
+        </div>
+
+        <button type="submit" class="login-btn">
+            LOGIN
+        </button>
+
+    </form>
+
+    <div class="footer">
+        Don't have an account?
+        <a href="#">Register</a>
+    </div>
+
+</div>
+
+</body>
 </html>

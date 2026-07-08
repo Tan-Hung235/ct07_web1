@@ -1,4 +1,3 @@
-```jsp
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.util.List" %>
 <%@ page import="model.Product" %>
@@ -9,77 +8,283 @@
 <head>
     <meta charset="UTF-8">
     <title>Quản lý sản phẩm</title>
+
     <style>
-        body { font-family: Arial, sans-serif; margin: 20px; }
-        form { margin-bottom: 20px; padding: 15px; border: 1px solid #ccc; width: 70%; }
-        input, button, a.button { padding: 6px; margin: 4px 0; }
-        table { border-collapse: collapse; width: 90%; margin-top: 20px; }
-        th, td { border: 1px solid #ccc; padding: 8px; text-align: center; }
-        th { background-color: #f2f2f2; }
-        .actions a { margin: 0 5px; }
-    </style>
-</head>
-<body>
-    <h2>QUẢN LÝ SẢN PHẨM</h2>
-
-    <%
-        Product editProduct = (Product) request.getAttribute("editProduct");
-        List<Product> list = (List<Product>) request.getAttribute("products");
-        if (list == null) {
-            list = new ProductDAO().getAllProducts();
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:Segoe UI, Tahoma, Geneva, Verdana, sans-serif;
         }
-    %>
 
-    <form action="<%= request.getContextPath() %>/products" method="post">
-        <input type="hidden" name="action" value="<%= editProduct != null ? "update" : "create" %>">
-        <% if (editProduct != null) { %>
-            <input type="hidden" name="productId" value="<%= editProduct.getProductID() %>">
-        <% } %>
+        body{
+            background:#eef2f7;
+            padding:40px;
+        }
 
-        <div>Tên sản phẩm: <input type="text" name="productName" value="<%= editProduct != null ? editProduct.getProductName() : "" %>" required></div>
-        <div>Supplier ID: <input type="number" name="supplierId" value="<%= editProduct != null ? editProduct.getSupplierID() : "" %>" required></div>
-        <div>Category ID: <input type="number" name="categoryId" value="<%= editProduct != null ? editProduct.getCategoryID() : "" %>" required></div>
-        <div>Quantity Per Unit: <input type="text" name="quantityPerUnit" value="<%= editProduct != null ? editProduct.getQuantityPerUnit() : "" %>"></div>
-        <div>Unit Price: <input type="number" step="0.01" name="unitPrice" value="<%= editProduct != null ? editProduct.getUnitPrice() : "" %>" required></div>
-        <div>Units In Stock: <input type="number" name="unitsInStock" value="<%= editProduct != null ? editProduct.getUnitsInStock() : "" %>" required></div>
-        <div style="margin-top:10px;">
-            <button type="submit"><%= editProduct != null ? "Cập nhật" : "Thêm mới" %></button>
-            <% if (editProduct != null) { %>
-                <a href="<%= request.getContextPath() %>/products">Hủy</a>
-            <% } %>
-        </div>
-    </form>
+        .container{
+            width:95%;
+            max-width:1200px;
+            margin:auto;
+        }
 
-    <table>
-        <tr>
-            <th>ID</th>
-            <th>Tên sản phẩm</th>
-            <th>Supplier ID</th>
-            <th>Category ID</th>
-            <th>Quantity Per Unit</th>
-            <th>Unit Price</th>
-            <th>Units In Stock</th>
-            <th>Hành động</th>
-        </tr>
+        h2{
+            text-align:center;
+            color:#2c3e50;
+            margin-bottom:30px;
+            font-size:34px;
+        }
 
-        <% if (list != null) {
-            for (Product p : list) { %>
-        <tr>
-            <td><%= p.getProductID() %></td>
-            <td><%= p.getProductName() %></td>
-            <td><%= p.getSupplierID() %></td>
-            <td><%= p.getCategoryID() %></td>
-            <td><%= p.getQuantityPerUnit() %></td>
-            <td><%= p.getUnitPrice() %></td>
-            <td><%= p.getUnitsInStock() %></td>
-            <td class="actions">
-                <a href="<%= request.getContextPath() %>/products?action=edit&id=<%= p.getProductID() %>">Sửa</a>
-                <a href="<%= request.getContextPath() %>/products?action=delete&id=<%= p.getProductID() %>" onclick="return confirm('Xóa sản phẩm này?');">Xóa</a>
-            </td>
-        </tr>
-        <% }
-        } %>
-    </table>
+        .card{
+            background:white;
+            padding:25px;
+            border-radius:12px;
+            box-shadow:0 5px 15px rgba(0,0,0,.12);
+            margin-bottom:30px;
+        }
+
+        .form-group{
+            margin-bottom:18px;
+        }
+
+        .form-group label{
+            display:block;
+            margin-bottom:6px;
+            font-weight:bold;
+            color:#555;
+        }
+
+        .form-group input{
+            width:100%;
+            padding:11px;
+            border:1px solid #ccc;
+            border-radius:8px;
+            font-size:15px;
+            transition:.3s;
+        }
+
+        .form-group input:focus{
+            outline:none;
+            border-color:#3498db;
+            box-shadow:0 0 5px rgba(52,152,219,.3);
+        }
+
+        .btn{
+            border:none;
+            padding:11px 22px;
+            border-radius:8px;
+            cursor:pointer;
+            color:white;
+            font-size:15px;
+            text-decoration:none;
+            display:inline-block;
+        }
+
+        .btn-save{
+            background:#3498db;
+        }
+
+        .btn-save:hover{
+            background:#2980b9;
+        }
+
+        .btn-cancel{
+            background:#7f8c8d;
+        }
+
+        .btn-cancel:hover{
+            background:#636e72;
+        }
+
+        table{
+            width:100%;
+            border-collapse:collapse;
+            background:white;
+            border-radius:12px;
+            overflow:hidden;
+            box-shadow:0 5px 15px rgba(0,0,0,.12);
+        }
+
+        thead{
+            background:#3498db;
+            color:white;
+        }
+
+        th{
+            padding:15px;
+        }
+
+        td{
+            padding:12px;
+            text-align:center;
+            border-bottom:1px solid #eee;
+        }
+
+        tbody tr:nth-child(even){
+            background:#f8f9fa;
+        }
+
+        tbody tr:hover{
+            background:#eaf4ff;
+        }
+
+        .actions a{
+            text-decoration:none;
+            color:white;
+            padding:7px 12px;
+            border-radius:6px;
+            margin:0 3px;
+            font-size:14px;
+        }
+
+        .actions a:first-child{
+            background:#27ae60;
+        }
+
+        .actions a:first-child:hover{
+            background:#1e8449;
+        }
+
+        .actions a:last-child{
+            background:#e74c3c;
+        }
+
+        .actions a:last-child:hover{
+            background:#c0392b;
+        }
+    </style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>Quản Lý Sản Phẩm</h2>
+
+<%
+    Product editProduct = (Product) request.getAttribute("editProduct");
+    List<Product> list = (List<Product>) request.getAttribute("products");
+    if (list == null) {
+        list = new ProductDAO().getAllProducts();
+    }
+%>
+
+<div class="card">
+
+<form action="<%= request.getContextPath() %>/products" method="post">
+
+    <input type="hidden" name="action"
+        value="<%= editProduct != null ? "update" : "create" %>">
+
+    <% if(editProduct != null){ %>
+        <input type="hidden" name="productId"
+            value="<%= editProduct.getProductID() %>">
+    <% } %>
+
+    <div class="form-group">
+        <label>Tên sản phẩm</label>
+        <input type="text" name="productName"
+            value="<%= editProduct!=null ? editProduct.getProductName() : "" %>" required>
+    </div>
+
+    <div class="form-group">
+        <label>Supplier ID</label>
+        <input type="number" name="supplierId"
+            value="<%= editProduct!=null ? editProduct.getSupplierID() : "" %>" required>
+    </div>
+
+    <div class="form-group">
+        <label>Category ID</label>
+        <input type="number" name="categoryId"
+            value="<%= editProduct!=null ? editProduct.getCategoryID() : "" %>" required>
+    </div>
+
+    <div class="form-group">
+        <label>Quantity Per Unit</label>
+        <input type="text" name="quantityPerUnit"
+            value="<%= editProduct!=null ? editProduct.getQuantityPerUnit() : "" %>">
+    </div>
+
+    <div class="form-group">
+        <label>Unit Price</label>
+        <input type="number" step="0.01" name="unitPrice"
+               value="<%= editProduct!=null ? editProduct.getUnitPrice() : "" %>" required>
+    </div>
+
+    <div class="form-group">
+        <label>Units In Stock</label>
+        <input type="number" name="unitsInStock"
+               value="<%= editProduct!=null ? editProduct.getUnitsInStock() : "" %>" required>
+    </div>
+
+    <button class="btn btn-save" type="submit">
+        <%= editProduct != null ? "Cập nhật" : "Thêm mới" %>
+    </button>
+
+    <% if(editProduct != null){ %>
+        <a class="btn btn-cancel"
+           href="<%= request.getContextPath() %>/products">
+            Hủy
+        </a>
+    <% } %>
+
+</form>
+
+</div>
+
+<table>
+
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Tên sản phẩm</th>
+        <th>Supplier</th>
+        <th>Category</th>
+        <th>Quantity</th>
+        <th>Price</th>
+        <th>Stock</th>
+        <th>Hành động</th>
+    </tr>
+    </thead>
+
+    <tbody>
+
+    <% if(list!=null){
+        for(Product p:list){ %>
+
+    <tr>
+
+        <td><%= p.getProductID() %></td>
+        <td><%= p.getProductName() %></td>
+        <td><%= p.getSupplierID() %></td>
+        <td><%= p.getCategoryID() %></td>
+        <td><%= p.getQuantityPerUnit() %></td>
+        <td>$ <%= p.getUnitPrice() %></td>
+        <td><%= p.getUnitsInStock() %></td>
+
+        <td class="actions">
+
+            <a href="<%=request.getContextPath()%>/products?action=edit&id=<%=p.getProductID()%>">
+                Sửa
+            </a>
+
+            <a href="<%=request.getContextPath()%>/products?action=delete&id=<%=p.getProductID()%>"
+            onclick="return confirm('Xóa sản phẩm này?');">
+                Xóa
+            </a>
+
+        </td>
+
+    </tr>
+
+    <% }} %>
+
+    </tbody>
+
+</table>
+
+</div>
+
 </body>
 </html>
-```
